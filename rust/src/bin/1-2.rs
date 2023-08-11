@@ -14,6 +14,7 @@ fn part_02(input: &str) -> String {
     i.to_string()
 }
 
+#[allow(dead_code)]
 fn part_02_iterators(input: &str) -> usize {
     let mut acc = 0;
     let pos = input
