@@ -1,12 +1,4 @@
-pub fn part_01(input: &str) -> i32 {
-    input.split("").fold(0, |acc, s| match s {
-        ")" => acc - 1,
-        "(" => acc + 1,
-        _ => acc,
-    })
-}
-
-pub fn part_02(input: &str) -> usize {
+fn part_02(input: &str) -> String {
     let mut sum = 0;
     let mut i = 0;
 
@@ -19,11 +11,10 @@ pub fn part_02(input: &str) -> usize {
         i += 1;
     }
 
-    i
+    i.to_string()
 }
 
-#[allow(dead_code)]
-pub fn part_02_iterators(input: &str) -> usize {
+fn part_02_iterators(input: &str) -> usize {
     let mut acc = 0;
     let pos = input
         .chars()
@@ -45,18 +36,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_day1_part1() {
-        assert_eq!(part_01("(())"), part_01("()()"));
-        assert_eq!(part_01("((("), part_01("(()(()("));
-        assert_eq!(part_01("))((((("), 3);
-        assert_eq!(part_01("())"), part_01("))("));
-        assert_eq!(part_01(")))"), part_01(")())())"));
-    }
-
-    #[test]
     fn test_day1_part2() {
-        assert_eq!(part_02(")"), 1);
-        assert_eq!(part_02("()())"), 5);
+        assert_eq!(part_02(")"), "1");
+        assert_eq!(part_02("()())"), "5");
     }
 
     #[test]
@@ -64,4 +46,9 @@ mod tests {
         assert_eq!(part_02_iterators(")"), 1);
         assert_eq!(part_02_iterators("()())"), 5);
     }
+}
+
+use rust::run;
+fn main() {
+    run(part_02);
 }
