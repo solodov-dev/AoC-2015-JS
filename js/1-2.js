@@ -1,8 +1,6 @@
-#!/usr/bin/env node
-
 const run = require("./utils/run");
 
-const solution_part_2 = (input) => {
+module.exports = (input) => {
   let sum = 0;
   let i = 0;
 
@@ -14,6 +12,4 @@ const solution_part_2 = (input) => {
   return i;
 };
 
-run(solution_part_2);
-
-module.exports = solution_part_2;
+run(module.exports);

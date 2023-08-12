@@ -1,6 +1,6 @@
-const solution_part_2 = require("./1-2");
+const solution = require("./1-2");
 
-it("Test input, part 2", () => {
-  expect(solution_part_2(")") === 1);
-  expect(solution_part_2("()())") === 5);
+it("Test input, day 1 part 2", () => {
+  expect(solution(")") === 1);
+  expect(solution("()())") === 5);
 });
