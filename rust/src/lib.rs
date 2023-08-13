@@ -4,9 +4,11 @@ use std::{
 };
 
 pub fn run<T: Display>(f: fn(&str) -> T) {
-    let input = io::stdin()
+    let mut input = io::stdin()
         .lock()
         .lines()
         .fold("".to_string(), |acc, line| acc + &line.unwrap() + "\n");
+    // Remove last new line
+    input.pop();
     println!("{}", f(&input));
 }

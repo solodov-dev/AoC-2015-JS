@@ -1,18 +1,16 @@
 struct Point {
     x: i32,
     y: i32,
-    map: HashMap<String, bool>,
+    map: HashSet<String>,
 }
 
 impl Point {
     fn new() -> Point {
-        let mut point = Point {
+        Point {
             x: 0,
             y: 0,
-            map: HashMap::new(),
-        };
-        point.present();
-        point
+            map: HashSet::new(),
+        }
     }
 
     fn step(&mut self, dir: char) {
@@ -21,34 +19,32 @@ impl Point {
             'v' => self.x -= 1,
             '<' => self.y -= 1,
             '^' => self.x += 1,
-            '\n' => (),
             _ => panic!("Unknown direction: {}", dir),
         };
-        self.present();
     }
 
     fn present(&mut self) {
         let key = format!("{}_{}", self.x, self.y);
-        self.map.insert(key, true);
+        self.map.insert(key);
     }
 
-    fn count(&self) -> u32 {
-        self.map
-            .values()
-            .fold(0, |acc, el| if *el { acc + 1 } else { acc })
+    fn count(&self) -> usize {
+        self.map.len()
     }
 }
 
-fn parse(input: &str) -> u32 {
+fn parse(input: &str) -> usize {
     let mut point = Point::new();
+    point.present();
     for dir in input.chars() {
         point.step(dir);
+        point.present();
     }
     point.count()
 }
 
 use core::panic;
-use std::collections::HashMap;
+use std::collections::HashSet;
 
 use rust::run;
 fn main() {
