@@ -1,8 +1,8 @@
 main :: IO ()
-main = interact $ show . sum . map (calc . words . replace) . lines
+main = interact $ show . sum . map (calc . split) . lines
 
-replace :: String -> String
-replace str = [if c == 'x' then ' ' else c | c <- str]
+split :: String -> [String]
+split str = words [if c == 'x' then ' ' else c | c <- str]
 
 calc :: (Ord a, Read a, Num a) => [String] -> a
 calc (length : width : height : _) = minimum perimeters + vol
