@@ -5,7 +5,8 @@
 To run JavaScript solutions:
 
 ```sh
-$ cat input/day_01 | ./js/1-1.js
+$ cd js
+$ cat ../input/day_1 | node 1-1.js
 ```
 
 ## Rust
@@ -14,7 +15,7 @@ To run Rust solutions:
 
 ```sh
 $ cd rust
-$ cat ../input/day_01 | cargo run --bin 1-1
+$ cat ../input/day_1 | cargo run --bin 1-1
 ```
 
 ## Haskell
@@ -22,5 +23,6 @@ $ cat ../input/day_01 | cargo run --bin 1-1
 To run Rust solutions:
 
 ```sh
-$ cat input/day_01 | runhaskell haskell/1-1
+$ cd haskell
+$ cat ../input/day_1 | cabal run 1-1
 ```
