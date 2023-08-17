@@ -1,12 +1,18 @@
 # Advent of code 2015
 
+## Runner
+
+Just execute the runner with the command `./run` and follow prompts.
+
+Or, if you want to run manually:
+
 ## JavaScript
 
 To run JavaScript solutions:
 
 ```sh
 $ cd js
-$ cat ../input/day_1 | node 1-1.js
+$ cat ../input/day_1 | node 1-1
 ```
 
 ## Rust
