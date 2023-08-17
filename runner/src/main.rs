@@ -68,5 +68,5 @@ fn main() {
 
     let output = last.wait_with_output().unwrap();
     let result = from_utf8(&output.stdout).unwrap();
-    print!("{}", result);
+    println!("{}", result);
 }
