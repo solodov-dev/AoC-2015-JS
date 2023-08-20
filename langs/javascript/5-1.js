@@ -10,4 +10,4 @@ module.exports = (input) => {
   );
 };
 
-run(module.exports);
+run((input) => input.split("\n").filter(module.exports).length);

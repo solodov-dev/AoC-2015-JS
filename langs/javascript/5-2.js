@@ -7,4 +7,4 @@ module.exports = (input) => {
   return has_pair.test(input) && has_middle.test(input);
 };
 
-run(module.exports);
+run((input) => input.split("\n").filter(module.exports).length);
