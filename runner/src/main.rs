@@ -5,6 +5,7 @@ use std::{
     fs::{self, metadata},
     process::{Command, Stdio},
     str::from_utf8,
+    time::Instant,
 };
 
 fn main() {
@@ -60,6 +61,8 @@ fn main() {
         _ => panic!("Unknown lang"),
     };
 
+    let now = Instant::now();
+
     let last = command
         .stdin(Stdio::from(cat.stdout.unwrap()))
         .stdout(Stdio::piped())
@@ -67,6 +70,6 @@ fn main() {
         .unwrap();
 
     let output = last.wait_with_output().unwrap();
-    let result = from_utf8(&output.stdout).unwrap();
-    println!("{}", result);
+    let result = from_utf8(&output.stdout).unwrap().trim();
+    println!("{} ({:?})", result, now.elapsed());
 }
