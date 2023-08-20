@@ -11,15 +11,9 @@ hasThreeVowels (x : xs) n
   | otherwise = hasThreeVowels xs n
 
 hasDouble :: String -> Bool
-hasDouble [] = False
-hasDouble [_] = False
-hasDouble (x : y : xs)
-  | x == y = True
-  | otherwise = hasDouble (y : xs)
+hasDouble (x : y : zs) = x == y || hasDouble (y : zs)
+hasDouble _ = False
 
 includesBadElems :: String -> Bool
-includesBadElems [] = False
-includesBadElems [_] = False
-includesBadElems (x : y : xs)
-  | [x, y] `elem` ["ab", "cd", "pq", "xy"] = True
-  | otherwise = includesBadElems (y : xs)
+includesBadElems (x : y : zs) = [x, y] `elem` ["ab", "cd", "pq", "xy"] || includesBadElems (y : zs)
+includesBadElems _ = False
