@@ -59,7 +59,7 @@ fn main() {
     match *lang {
         "haskell" => command.arg("run").arg("--verbose=0").arg(filename),
         "rust" => command.arg("run").arg("--quiet").arg("--bin").arg(filename),
-        "awk" => command.arg("-f").arg(filename),
+        "awk" => command.arg("-i").arg("utils.awk").arg("-f").arg(filename),
         "javascript" => command.arg(filename),
         _ => panic!("Unknown lang"),
     };
