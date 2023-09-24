@@ -13,6 +13,7 @@ fn main() {
         ("haskell", "cabal"),
         ("rust", "cargo"),
         ("javascript", "node"),
+        ("awk", "awk"),
     ]);
 
     println!("Hello and welcome to Advent of Code 2015");
@@ -38,7 +39,7 @@ fn main() {
 
     let lang = Select::new("With what language?", langs.keys().collect())
         .prompt()
-        .unwrap();
+        .unwrap_or_else(|_| panic!("Error selecting a language. Abort."));
 
     let cat = Command::new("cat")
         .arg(format!("{}/input/day_{}", root, day))
@@ -46,7 +47,8 @@ fn main() {
         .spawn()
         .unwrap();
 
-    set_current_dir(format!("{}/langs/{}", root, lang)).unwrap();
+    set_current_dir(format!("{}/langs/{}", root, lang))
+        .unwrap_or_else(|_| panic!("Cannot find directory for lang {}", lang));
 
     print!("{} solution for day {} part {} is ", lang, day, part,);
 
@@ -57,6 +59,7 @@ fn main() {
     match *lang {
         "haskell" => command.arg("run").arg("--verbose=0").arg(filename),
         "rust" => command.arg("run").arg("--quiet").arg("--bin").arg(filename),
+        "awk" => command.arg("-f").arg(filename),
         "javascript" => command.arg(filename),
         _ => panic!("Unknown lang"),
     };
