@@ -9,7 +9,7 @@ module.exports = (input) => {
       for (let j = fromY; j <= toY; j++) {
         switch (command) {
           case "on": grid[i][j] += 1; break;
-          case "off": grid[i][j] = grid[i][j] === 0 ? 0 : grid[i][j] - 1; break;
+          case "off": if (grid[i][j] > 0) grid[i][j] -= 1; break;
           case "toggle": grid[i][j] += 2;
         }
       }

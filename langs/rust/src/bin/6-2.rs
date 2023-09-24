@@ -1,7 +1,7 @@
 use rust::run;
 
 fn solution(input: &str) -> usize {
-    let mut grid = vec![vec![false; 1000]; 1000];
+    let mut grid = vec![vec![0; 1000]; 1000];
     let commands = input.lines().map(split_commands);
     for command in commands {
         match &command[..] {
@@ -13,9 +13,9 @@ fn solution(input: &str) -> usize {
                 for i in from_x..to_x + 1 {
                     for j in from_y..to_y + 1 {
                         match cmd.as_str() {
-                            "on" => grid[i][j] = true,
-                            "off" => grid[i][j] = false,
-                            "toggle" => grid[i][j] = !grid[i][j],
+                            "on" => grid[i][j] += 1,
+                            "off" => if grid[i][j] > 0 { grid[i][j] -= 1},
+                            "toggle" => grid[i][j] += 2,
                             _ => panic!("unknown command"),
                         }
                     }
@@ -26,9 +26,7 @@ fn solution(input: &str) -> usize {
     }
     grid.iter()
         .flatten()
-        .filter(|v| **v == true)
-        .collect::<Vec<&bool>>()
-        .len()
+        .sum()
 }
 
 fn split_commands(s: &str) -> Vec<String> {
@@ -50,12 +48,8 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_6_1() {
-        assert_eq!(solution("turn on 0,0 through 999,999"), 1000 * 1000);
-        assert_eq!(solution("toggle 0,0 through 999,0"), 1000);
-        assert_eq!(
-            solution("turn on 0,0 through 999,999\nturn off 499,499 through 500,500"),
-            1000 * 1000 - 4
-        );
+    fn test_6_2() {
+        assert_eq!(solution("turn on 0,0 through 0,0"), 1);
+        assert_eq!(solution("toggle 0,0 through 999,999"), 1000*1000*2);
     }
 }
