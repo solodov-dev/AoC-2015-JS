@@ -1,0 +1,8 @@
+BEGIN {FS=" |( -> )"; MASK=65535}
+/NOT/ {circuit[$3] = compl(circuit[$2])}
+/OR/ {circuit[$4] = or(circuit[$1], circuit[$3])}
+/AND/ {circuit[$4] = and(circuit[$1], circuit[$3])}
+/LSHIFT/ {circuit[$4] = lshift(circuit[$1], $3)}
+/RSHIFT/ {circuit[$4] = rshift(circuit[$1], $3)}
+/[0-9]+/ {circuit[$2] = $1}
+END {print and(MASK, circuit["a"])}
